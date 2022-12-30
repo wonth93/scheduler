@@ -3,11 +3,26 @@ import axios from "axios";
 
 export default function useApplicationdatas() {
 
+  function updateSpots(state, day) {
+    const dayInfo = state.days.filter(date => date.name === day);
+    let spots = 0;
+
+    dayInfo[0].appointments.forEach(appointment => {
+      if(!state.appointments[appointment].interview) {
+        spots ++;
+      }
+    })
+
+    return spots;
+
+  }
+
   const [state, setState] = useState({
     day: "Monday",
     days: [],
     appointments: {},
-    interviewers: {}
+    interviewers: {},
+    spots: 0
   });
   
   const setDay = day => setState({...state, day});
@@ -22,12 +37,17 @@ export default function useApplicationdatas() {
       ...state.appointments,
       [id]: appointment
     };
+    const spots = updateSpots(state, state.day);
   
     
     return axios
       .put(`http://localhost:8001/api/appointments/${id}`, { interview })
-      .then(() => setState({ ...state, appointments }));
-  
+      // .then(() => setState({ ...state, appointments, spots }));
+      .then(() => {
+        setState({ ...state, appointments, spots })
+      });
+      
+      console.log(spots)
   }
   
   function cancelInterview(id) {
@@ -42,7 +62,8 @@ export default function useApplicationdatas() {
           ...state.appointments,
           [id]: appointment
         }
-        setState({ ...state, appointments })
+        const spots = updateSpots(state, state.day);
+        setState({ ...state, appointment, spots })
       });     
   }
   
