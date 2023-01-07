@@ -44,7 +44,10 @@ export default function useApplicationdatas() {
     }
 
     const update = state.days.map((day) => {
+      if (day.appointments.includes(appointmentsId)) {
         return { ...day, spots: day.spots + changeSpot }
+      }
+      return day;
     });
 
     return update;
@@ -55,7 +58,7 @@ export default function useApplicationdatas() {
 
     const appointment = {
       ...state.appointments[id],
-      interview: { ...interview },
+      interview: { ...interview }
     };
     const appointments = {
       ...state.appointments,
@@ -65,10 +68,9 @@ export default function useApplicationdatas() {
     const days = updateSpots(state, appointments, id);
     
     return axios
-      .put(`http://localhost:8001/api/appointments/${id}`, { ...interview })
+      .put(`http://localhost:8001/api/appointments/${id}`, { interview })
       .then(() => {
-        setState({ ...state, appointments, days})
-        console.log(state.days);
+        setState({ ...state, appointments, days});
       });
       
   }
@@ -85,8 +87,8 @@ export default function useApplicationdatas() {
           ...state.appointments,
           [id]: appointment
         }
-        // const spots = updateSpots(state, state.day);
-        setState({ ...state, appointments })
+        const days = updateSpots(state, appointments, id);
+        setState({ ...state, appointments, days });
       });     
   }
   
