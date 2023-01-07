@@ -70,7 +70,7 @@ export default {
         status: 200,
         statusText: "Ok",
         data: fixtures.appointments
-      })
+      });
     }
 
     if (url === "http://localhost:8001/api/interviewers") {
@@ -79,7 +79,16 @@ export default {
         status: 200,
         statusText: "Ok",
         data: fixtures.interviewers
-      })
+      });
+    }
+  }),
+  put: jest.fn(url => {
+    if (url === "http://localhost:8001/api/appointments/1") {
+      /* Resolve appointments data */
+      return Promise.resolve({
+        status: 204,
+        statusText: "No Content",
+      });
     }
   })
 }
