@@ -4,13 +4,23 @@ This app is built by React.js and for users to book, edit, or delete appointment
 
 ## Screenshots
 
+The home page UI
+
 !["Home Page"](./docs/HomePage.png)
+
+To book an appointment
+
 !["To Book Appointment"](./docs/BookAppointment.png)
+
+Confirmation message when you delete an appointment
+
 !["To Delete Appointment"](./docs/DeleteAppointment.png)
 
 ## Setup
 
 Install dependencies with `npm install`.
+
+P.S. DB can be installed at the scheduler-api repository
 
 ## Running Webpack Development Server
 
