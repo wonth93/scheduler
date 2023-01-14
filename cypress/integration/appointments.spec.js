@@ -1,9 +1,10 @@
 describe("Appointments", function() {
   beforeEach(() => {
+    // reset data base
     cy.request("GET", "/api/debug/reset");
 
+    // visit root page
     cy.visit("/");
-    
     cy.contains("Monday");
   });
 

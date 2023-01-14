@@ -14,8 +14,6 @@ export default function useApplicationdatas() {
       axios.get(interviewersURL)
     ])
       .then((all) => {
-        // setDays(response.data)
-        // console.log(all[2].data)
         setState(prev => ({ ...prev, days: all[0].data, appointments: all[1].data, interviewers: all[2].data }))
       });
   }, []);  
@@ -28,9 +26,6 @@ export default function useApplicationdatas() {
   });
   
   const setDay = day => setState({...state, day});
-
-
-
 
   function updateSpots(state, appointments, appointmentsId) {
     let changeSpot = 0;

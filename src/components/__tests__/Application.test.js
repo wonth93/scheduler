@@ -1,5 +1,5 @@
 import React from "react";
-import { render, cleanup, waitForElement, waitForElementToBeRemoved, queryByAltText, getByPlaceholderText, fireEvent, getByText, prettyDOM, getAllByTestId, getByAltText, queryByText } from "@testing-library/react";
+import { render, cleanup, waitForElement, waitForElementToBeRemoved, queryByAltText, getByPlaceholderText, fireEvent, getByText, getAllByTestId, getByAltText, queryByText } from "@testing-library/react";
 import Application from "components/Application";
 import axios from "axios";
 
@@ -19,7 +19,7 @@ describe("Application", () => {
   });
 
   it("loads data, books an interview and reduces the spots remaining for the first day by 1", async () => {
-    const { container, debug } = render(<Application />);
+    const { container } = render(<Application />);
     
     await waitForElement(() => getByText(container, "Archie Cohen"));
     
@@ -43,15 +43,11 @@ describe("Application", () => {
     const days = getAllByTestId(container, "day");
     const day = days.find(day => queryByText(day, "Monday"));
     expect(getByText(day, /no spots remaining/i)).toBeInTheDocument();
-    
-    // debug()
-    // console.log(prettyDOM(day));
-    // console.log(prettyDOM(container));
 
   });
   
   it("loads data, cancels an interview and increases the spots remaining for Monday by 1", async () => {
-    const { container, debug } = render(<Application />);
+    const { container } = render(<Application />);
 
     await waitForElement(() => getByText(container, "Archie Cohen"));
 
@@ -71,11 +67,10 @@ describe("Application", () => {
     const day = days.find(day => queryByText(day, "Monday"));
     expect(getByText(day, /2 spots remaining/i)).toBeInTheDocument();
 
-    // debug();
   });
 
   it("loads data, edits an interview and keeps the spots remaining for Monday the same", async () => {
-    const { container, debug } = render(<Application />);
+    const { container } = render(<Application />);
 
     await waitForElement(() => getByText(container, "Archie Cohen"));
 
@@ -100,12 +95,11 @@ describe("Application", () => {
     const day = days.find(day => queryByText(day, "Monday"));
     expect(getByText(day, /1 spot remaining/i)).toBeInTheDocument();
 
-    // debug()
   });
 
   it("shows the save error when failing to save an appointment", async() => {
     axios.put.mockRejectedValueOnce();
-    const { container, debug } = render(<Application />);
+    const { container } = render(<Application />);
     
     await waitForElement(() => getByText(container, "Archie Cohen"));
     
@@ -127,7 +121,7 @@ describe("Application", () => {
 
   it("shows the delete error when failing to delete an existing appointment", async() => {
     axios.delete.mockRejectedValueOnce();
-    const { container, debug } = render(<Application />);
+    const { container } = render(<Application />);
     await waitForElement(() => getByText(container, "Archie Cohen"));
 
     const appointment = getAllByTestId(container, "appointment").find(
@@ -142,7 +136,6 @@ describe("Application", () => {
     await waitForElementToBeRemoved(() => getByText(appointment, "Deleting"));
     expect(getByText(appointment, /Could not delete appointment/i)).toBeInTheDocument();
 
-    // debug();
   });
 
 });
