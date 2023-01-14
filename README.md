@@ -1,5 +1,11 @@
 # Interview Scheduler
 
+This app is built by React.js and for users to book, edit, or delete appointments.
+
+## Screenshots
+
+
+
 ## Setup
 
 Install dependencies with `npm install`.
