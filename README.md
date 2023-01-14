@@ -4,7 +4,9 @@ This app is built by React.js and for users to book, edit, or delete appointment
 
 ## Screenshots
 
-
+!["Home Page"](./docs/HomePage.png)
+!["To Book Appointment"](./docs/BookAppointment.png)
+!["To Delete Appointment"](./docs/DeleteAppointment.png)
 
 ## Setup
 
