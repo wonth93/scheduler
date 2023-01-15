@@ -20,7 +20,7 @@ Confirmation message when you delete an appointment
 
 Install dependencies with `npm install`.
 
-P.S. DB can be installed at the scheduler-api repository
+P.S. DB can be installed at the [scheduler-api](https://github.com/wonth93/scheduler-api) repository
 
 ## Running Webpack Development Server
 
@@ -39,3 +39,11 @@ npm test
 ```sh
 npm run storybook
 ```
+## Dependencies
+
+* Axios
+* React
+* Storybook
+* Cypress
+* Jest
+* PSQL

@@ -4,9 +4,9 @@ import axios from "axios";
 export default function useApplicationdatas() {
 
   useEffect(() => {
-    const daysURL = `http://localhost:8001/api/days`;
-    const appointmentsURL = `http://localhost:8001/api/appointments`;
-    const interviewersURL = `http://localhost:8001/api/interviewers`;
+    const daysURL = `/api/days`;
+    const appointmentsURL = `/api/appointments`;
+    const interviewersURL = `/api/interviewers`;
   
     Promise.all([
       axios.get(daysURL),
@@ -63,7 +63,7 @@ export default function useApplicationdatas() {
     const days = updateSpots(state, appointments, id);
     
     return axios
-      .put(`http://localhost:8001/api/appointments/${id}`, { interview })
+      .put(`/api/appointments/${id}`, { interview })
       .then(() => {
         setState({ ...state, appointments, days});
       });
@@ -72,7 +72,7 @@ export default function useApplicationdatas() {
   
   function cancelInterview(id) {
     return axios
-      .delete(`http://localhost:8001/api/appointments/${id}`)
+      .delete(`/api/appointments/${id}`)
       .then(() => {
         const appointment = {
           ...state.appointments[id],
